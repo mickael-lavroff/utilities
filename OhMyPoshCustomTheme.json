@@ -1,0 +1,88 @@
+{
+    "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+    "final_space": true,
+    "blocks": [
+        {
+            "type": "prompt",
+            "alignment": "left",
+            "segments": [
+                {
+                    "type": "session",
+                    "style": "diamond",
+                    "foreground": "#ffffff",
+                    "background": "#9A348E",
+                    "leading_diamond": "",
+                    "trailing_diamond": "",
+                    "properties": {
+                        "prefix": "  ",
+                        "template": "{{ .UserName }}"
+                    }
+                },
+                {
+                    "type": "path",
+                    "style": "powerline",
+                    "powerline_symbol": "",
+                    "foreground": "#ffffff",
+                    "background": "#ff479c",
+                    "properties": {
+                        "prefix": "  ",
+                        "style": "folder"
+                    }
+                },
+                {
+                    "type": "git",
+                    "style": "powerline",
+                    "powerline_symbol": "",
+                    "leading_diamond": "",
+                    "trailing_diamond": "",
+                    "foreground": "#0f0f0f",
+                    "background": "#fffb38",
+                    "properties": {
+                        "display_status": true,
+                        "template": "{{ .UpstreamIcon }}{{ .HEAD }}{{ if gt .StashCount 0 }}  {{ .StashCount }}{{ end }}"
+                    }
+                },
+                {
+                    "type": "az",
+                    "style": "powerline",
+                    "powerline_symbol": "",
+                    "foreground": "#000000",
+                    "background": "#9ec3f0",
+                    "properties": {
+                        "display_name": true,
+                        "info_separator": " @ ",
+                        "prefix": " ﴃ ",
+                        "template": "{{ .Name }}"
+                    }
+                },
+                {
+                    "type": "root",
+                    "style": "powerline",
+                    "powerline_symbol": "\uE0B0",
+                    "foreground": "#ffffff",
+                    "background": "#ffa600",
+                    "properties": {
+                        "root_icon": ""
+                    }
+                },
+                {
+                    "type": "exit",
+                    "style": "powerline",
+                    "powerline_symbol": "",
+                    "invert_powerline": false,
+                    "foreground": "#ffffff",
+                    "background": "#2e9599",
+                    "leading_diamond": "",
+                    "trailing_diamond": "",
+                    "properties": {
+                        "always_enabled": true,
+                        "color_background": true,
+                        "display_exit_code": false,
+                        "error_color": "#f1184c",
+                        "prefix": " "
+                    }
+                }
+            ]
+        }
+    ]
+}
