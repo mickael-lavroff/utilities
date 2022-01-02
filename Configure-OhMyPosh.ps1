@@ -1,5 +1,5 @@
 # Import custom theme
-Invoke-WebRequest -Uri "https://github.com/mickael-lavroff/config-files/blob/main/ohmyposh-custom-theme-01.json" -OutFile $env:LOCALAPPDATA\Programs\oh-my-posh\themes\MickaelLavroff-Theme01.json
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mickael-lavroff/config-files/main/ohmyposh-custom-theme-01.json" -OutFile $env:LOCALAPPDATA\Programs\oh-my-posh\themes\MickaelLavroff-Theme01.json
 
 # Add oh-my-posh execution to all powershell default profile
 # $PROFILE is different for WindowsPowerShell and PowerShell, VSCode and Terminal.
