@@ -1,7 +1,7 @@
 # Import custom theme
-Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mickael-lavroff/oh-my-posh/main/CustomTheme01.json" -OutFile $env:LOCALAPPDATA\Programs\oh-my-posh\themes\CustomTheme01.json
+Invoke-WebRequest -Uri "https://github.com/mickael-lavroff/config-files/blob/main/ohmyposh-custom-theme-01.json" -OutFile $env:LOCALAPPDATA\Programs\oh-my-posh\themes\MickaelLavroff-Theme01.json
 
-# Add this to powershell default profile
+# Add oh-my-posh execution to all powershell default profile
 # $PROFILE is different for WindowsPowerShell and PowerShell, VSCode and Terminal.
 # Need to do all of them
 $profileFiles = @(
@@ -12,7 +12,13 @@ $profileFiles = @(
 )
 
 foreach ($profileFile in $profileFiles) {
-    Write-Output "`noh-my-posh --init --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\CustomTheme01.json --shell pwsh | Invoke-Expression" | Out-File -FilePath $profileFile -Force -Append
+    if (!(Test-Path $profileFile)) { 
+        New-Item -Path $profileFile -Force
+        Write-Output "`oh-my-posh --init --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\MickaelLavroff-Theme01.json --shell pwsh | Invoke-Expression" | Out-File -FilePath $profileFile -Force -Append
+    }
+    else {
+        Write-Output "`noh-my-posh --init --config $env:LOCALAPPDATA\Programs\oh-my-posh\themes\MickaelLavroff-Theme01.json --shell pwsh | Invoke-Expression" | Out-File -FilePath $profileFile -Force -Append
+    }
 }
 
 # Download and install my favorite NerdFont
@@ -22,10 +28,21 @@ $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
 gci $env:TEMP\CascadiaCode | % { $fonts.CopyHere($_.FullName) }
 Remove-Item $env:TEMP\CascadiaCode.zip, $env:TEMP\CascadiaCode -Recurse -Force
 
-# Configure Nerd Font in Terminal Profile (PowerShell and WindowsPowerShell)
-$jsonConfigFile = Get-Content $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json | ConvertFrom-Json -Depth 20
-$jsonConfigFile.profiles.list | ? guid -EQ '{574e775e-4f2a-5b96-ac1e-a2962a402336}' | Add-Member -Type NoteProperty -Name 'font' -Value ([PSCustomObject]@{ face = "CaskaydiaCove Nerd Font Mono" })
-$jsonConfigFile | ConvertTo-Json -Depth 20 | Set-Content -Path $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
-
 # Configure Nerd Font in host console (PowerShell and WindowsPowerShell)
 Set-ItemProperty -Path HKCU:\Console -Name FaceName -Value "CaskaydiaCove Nerd Font Mono"
+
+# Configure Nerd Font in Terminal Profile (PowerShell and WindowsPowerShell)
+<#
+*************************************************************************************
+This part is currently treated in Configure-Terminal using a full json settings file.
+It could be way better to provide flexibility here (regarding OMP setup only).
+*************************************************************************************
+
+if (!(Test-Path $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json)) {
+    Invoke-WebRequest -Uri "https://github.com/mickael-lavroff/config-files/blob/main/ohmyposh-custom-theme-01.json" -OutFile $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+}
+else {
+    $jsonConfigFile = Get-Content $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json | ConvertFrom-Json
+    $jsonConfigFile.profiles.list | ? guid -EQ '{574e775e-4f2a-5b96-ac1e-a2962a402336}' | Add-Member -Type NoteProperty -Name 'font' -Value ([PSCustomObject]@{ face = "CaskaydiaCove Nerd Font Mono" })
+    $jsonConfigFile | ConvertTo-Json -Depth 20 | Set-Content -Path $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+}#>

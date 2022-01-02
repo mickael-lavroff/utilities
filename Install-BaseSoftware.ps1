@@ -1,4 +1,4 @@
-winget upgrade --all
+winget upgrade --all -h --accept-package-agreements --accept-source-agreements
 
 # Base software
 winget install --id=Microsoft.Office -e -h --accept-package-agreements --accept-source-agreements

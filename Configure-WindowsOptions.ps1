@@ -7,3 +7,28 @@ Enable-WindowsOptionalFeature -FeatureName Microsoft-Hyper-V-All -Online -NoRest
 
 # Enable WSL
 Enable-WindowsOptionalFeature -FeatureName Microsoft-Windows-Subsystem-Linux -Online -NoRestart
+
+<# 
+
+Improvments to think about :
+****************************
+
+- Install all Nerd Fonts
+- Enable Containers feature
+- Disable unused services
+    - XPS documents writer
+- Uninstall useless applications
+    - PrimeVideo
+    - TikTok
+    - Microsoft News
+    - Notepad
+    - Paint
+    - People
+- Harden configuration
+    - Disable powershell 2.0 features
+    - Enable Defender Application Guard
+- Adjuts default behaviors/settings
+    - Show hidden folders
+    - Terminal PowerShell instead of CMD (win+R)
+
+#>

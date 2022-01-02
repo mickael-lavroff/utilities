@@ -23,25 +23,23 @@ The purpose of this project is to help install and setup all software automatica
 1. Open a PowerShell prompt **as administrator** *(I use Terminal)*
 1. Run Configure-WindowsOptions.ps1 using the command `.\Configure-WindowsOptions.ps1`
     + *It's not mandatory, but you will need to reboot to take advantage of newly enabled feature Hyper-V and WSL*
+    + *Explorer process will close at this step in order to enable the right click legacy-style menu right away*
 1. Run Configure-WindowsOptions.ps1 using the command `.\Install-BaseSoftware.ps1`
 1. Run Configure-OhMyPosh.ps1 using the command `.\Configure-OhMyPosh.ps1`
-1. Run Configure-VScode.ps1 using the command `.\Configure-VScode.ps1`
-1. Run Configure-OhMyPosh.ps1 using the command `.\Configure-OhMyPosh.ps1`
-1. Run Configure-VScode.ps1 using the command `.\Configure-VScode.ps1`
-1. Run Configure-Terminal.ps1 using the command `.\Configure-Terminal.ps1` 
+1. Run Configure-Terminal.ps1 using the command `.\Configure-Terminal.ps1`
 
 ## Help
 
 To authorize running scripts from your computer, make sure the ExecutionPolicy is set to 'Bypass' or 'Unrestricted' using these following commands in a PowerShell prompt as running with Administrators privileges 
 ```
 # To check current ExecutionPolicy settings
-Get-ExecutionPolicy -list
+Get-ExecutionPolicy -List
 
 # To set ExecutionPolicy setting to 'Bypass' for current user
-Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurentUser
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope CurentUser -Force
 
 # To set ExecutionPolicy setting to 'Unrestricted' for everyone
-Set-ExecutionPolicy -ExecutionPolicy Unrestricted
+Set-ExecutionPolicy -ExecutionPolicy Unrestricted -Force
 ```
 
 Some scripts may be dependant on the others, so make sure to run the steps in the sequential order as per instructed in the [Running section](#Running)
