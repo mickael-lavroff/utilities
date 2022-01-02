@@ -16,11 +16,11 @@ foreach ($profileFile in $profileFiles) {
 }
 
 # Download and install my favorite NerdFont
-Invoke-WebRequest -Uri https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip -OutFile $PSScriptRoot\CascadiaCode.zip
-Expand-Archive -Path $PSScriptRoot\CascadiaCode.zip -DestinationPath $PSScriptRoot\CascadiaCode -Force
+Invoke-WebRequest -Uri https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/CascadiaCode.zip -OutFile $env:TEMP\CascadiaCode.zip
+Expand-Archive -Path $env:TEMP\CascadiaCode.zip -DestinationPath $env:TEMP\CascadiaCode -Force
 $fonts = (New-Object -ComObject Shell.Application).Namespace(0x14)
-gci $PSScriptRoot\CascadiaCode | % { $fonts.CopyHere($_.FullName) }
-Remove-Item $PSScriptRoot\CascadiaCode.zip, $PSScriptRoot\CascadiaCode -Recurse -Force
+gci $env:TEMP\CascadiaCode | % { $fonts.CopyHere($_.FullName) }
+Remove-Item $env:TEMP\CascadiaCode.zip, $env:TEMP\CascadiaCode -Recurse -Force
 
 # Configure Nerd Font in Terminal Profile (PowerShell and WindowsPowerShell)
 $jsonConfigFile = Get-Content $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json | ConvertFrom-Json -Depth 20
