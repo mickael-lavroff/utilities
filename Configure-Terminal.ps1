@@ -1,2 +1,2 @@
 # Apply custom configuration file to Terminal application
-Invoke-WebRequest -Uri "https://github.com/mickael-lavroff/config-files/blob/main/ohmyposh-custom-theme-01.json" -OutFile $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
+Invoke-WebRequest -Uri "https://raw.githubusercontent.com/mickael-lavroff/config-files/main/terminal-custom-config-01.json" -OutFile $env:LOCALAPPDATA\Packages\Microsoft.WindowsTerminal_8wekyb3d8bbwe\LocalState\settings.json
